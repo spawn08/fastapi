@@ -24,118 +24,99 @@ Isso criará o diretório `./env/` com os binários Python e então você será 
 
 Ative o novo ambiente com:
 
-=== "Linux, macOS"
+//// tab | Linux, macOS
 
-    <div class="termy">
+<div class="termy">
 
-    ```console
-    $ source ./env/bin/activate
-    ```
+```console
+$ source ./env/bin/activate
+```
 
-    </div>
+</div>
 
-=== "Windows PowerShell"
+////
 
-    <div class="termy">
+//// tab | Windows PowerShell
 
-    ```console
-    $ .\env\Scripts\Activate.ps1
-    ```
+<div class="termy">
 
-    </div>
+```console
+$ .\env\Scripts\Activate.ps1
+```
 
-=== "Windows Bash"
+</div>
 
-    Ou se você usa Bash para Windows (por exemplo <a href="https://gitforwindows.org/" class="external-link" target="_blank">Git Bash</a>):
+////
 
-    <div class="termy">
+//// tab | Windows Bash
 
-    ```console
-    $ source ./env/Scripts/activate
-    ```
+Ou se você usa Bash para Windows (por exemplo <a href="https://gitforwindows.org/" class="external-link" target="_blank">Git Bash</a>):
 
-    </div>
+<div class="termy">
+
+```console
+$ source ./env/Scripts/activate
+```
+
+</div>
+
+////
 
 Para verificar se funcionou, use:
 
-=== "Linux, macOS, Windows Bash"
+//// tab | Linux, macOS, Windows Bash
 
-    <div class="termy">
+<div class="termy">
 
-    ```console
-    $ which pip
+```console
+$ which pip
 
-    some/directory/fastapi/env/bin/pip
-    ```
+some/directory/fastapi/env/bin/pip
+```
 
-    </div>
+</div>
 
-=== "Windows PowerShell"
+////
 
-    <div class="termy">
+//// tab | Windows PowerShell
 
-    ```console
-    $ Get-Command pip
+<div class="termy">
 
-    some/directory/fastapi/env/bin/pip
-    ```
+```console
+$ Get-Command pip
 
-    </div>
+some/directory/fastapi/env/bin/pip
+```
+
+</div>
+
+////
 
 Se ele exibir o binário `pip` em `env/bin/pip` então funcionou. 🎉
 
 
 
-!!! tip
-    Toda vez que você instalar um novo pacote com `pip` nesse ambiente, ative o ambiente novamente.
+/// tip
 
-    Isso garante que se você usar um programa instalado por aquele pacote (como `flit`), você utilizará aquele de seu ambiente local e não outro que possa estar instalado globalmente.
+Toda vez que você instalar um novo pacote com `pip` nesse ambiente, ative o ambiente novamente.
 
-### Flit
+Isso garante que se você usar um programa instalado por aquele pacote, você utilizará aquele de seu ambiente local e não outro que possa estar instalado globalmente.
 
-**FastAPI** utiliza <a href="https://flit.readthedocs.io/en/latest/index.html" class="external-link" target="_blank">Flit</a> para construir, empacotar e publicar o projeto.
+///
 
-Após ativar o ambiente como descrito acima, instale o `flit`:
+### pip
+
+Após ativar o ambiente como descrito acima:
 
 <div class="termy">
 
 ```console
-$ pip install flit
+$ pip install -r requirements.txt
 
 ---> 100%
 ```
 
 </div>
-
-Ative novamente o ambiente para ter certeza que você esteja utilizando o `flit` que você acabou de instalar (e não um global).
-
-E agora use `flit` para instalar as dependências de desenvolvimento:
-
-=== "Linux, macOS"
-
-    <div class="termy">
-
-    ```console
-    $ flit install --deps develop --symlink
-
-    ---> 100%
-    ```
-
-    </div>
-
-=== "Windows"
-
-    Se você está no Windows, use `--pth-file` ao invés de `--symlink`:
-
-    <div class="termy">
-
-    ```console
-    $ flit install --deps develop --pth-file
-
-    ---> 100%
-    ```
-
-    </div>
 
 Isso irá instalar todas as dependências e seu FastAPI local em seu ambiente local.
 
@@ -143,7 +124,7 @@ Isso irá instalar todas as dependências e seu FastAPI local em seu ambiente lo
 
 Se você cria um arquivo Python que importa e usa FastAPI, e roda com Python de seu ambiente local, ele irá utilizar o código fonte de seu FastAPI local.
 
-E se você atualizar o código fonte do FastAPI local, como ele é instalado com `--symlink` (ou `--pth-file` no Windows), quando você rodar aquele arquivo Python novamente, ele irá utilizar a nova versão do FastAPI que você acabou de editar.
+E se você atualizar o código fonte do FastAPI local, como ele é instalado com `-e`, quando você rodar aquele arquivo Python novamente, ele irá utilizar a nova versão do FastAPI que você acabou de editar.
 
 Desse modo, você não tem que "instalar" sua versão local para ser capaz de testar cada mudança.
 
@@ -161,7 +142,7 @@ $ bash scripts/format.sh
 
 Ele irá organizar também todos os seus imports.
 
-Para que ele organize os imports corretamente, você precisa ter o FastAPI instalado localmente em seu ambiente, com o comando na seção acima usando `--symlink` (ou `--pth-file` no Windows).
+Para que ele organize os imports corretamente, você precisa ter o FastAPI instalado localmente em seu ambiente, com o comando na seção acima usando `-e`.
 
 ### Formato dos imports
 
@@ -185,8 +166,11 @@ A documentação usa <a href="https://www.mkdocs.org/" class="external-link" tar
 
 E existem ferramentas/_scripts_ extras para controlar as traduções em `./scripts/docs.py`.
 
-!!! tip
-    Você não precisa ver o código em `./scripts/docs.py`, você apenas o utiliza na linha de comando.
+/// tip
+
+Você não precisa ver o código em `./scripts/docs.py`, você apenas o utiliza na linha de comando.
+
+///
 
 Toda a documentação está no formato Markdown no diretório `./docs/pt/`.
 
@@ -269,14 +253,17 @@ Aqui estão os passos para ajudar com as traduções.
 
 #### Dicas e orientações
 
-* Verifique sempre os <a href="https://github.com/tiangolo/fastapi/pulls" class="external-link" target="_blank">_pull requests_ existentes</a> para a sua linguagem e faça revisões das alterações e aprove elas.
+* Verifique sempre os <a href="https://github.com/fastapi/fastapi/pulls" class="external-link" target="_blank">_pull requests_ existentes</a> para a sua linguagem e faça revisões das alterações e aprove elas.
 
-!!! tip
-    Você pode <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request" class="external-link" target="_blank">adicionar comentários com sugestões de alterações</a> para _pull requests_ existentes.
+/// tip
 
-    Verifique as documentações sobre <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-reviews" class="external-link" target="_blank">adicionar revisão ao _pull request_</a> para aprovação ou solicitação de alterações.
+Você pode <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request" class="external-link" target="_blank">adicionar comentários com sugestões de alterações</a> para _pull requests_ existentes.
 
-* Verifique em <a href="https://github.com/tiangolo/fastapi/issues" class="external-link" target="_blank">_issues_</a> para ver se existe alguém coordenando traduções para a sua linguagem.
+Verifique as documentações sobre <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-reviews" class="external-link" target="_blank">adicionar revisão ao _pull request_</a> para aprovação ou solicitação de alterações.
+
+///
+
+* Verifique em <a href="https://github.com/fastapi/fastapi/issues" class="external-link" target="_blank">_issues_</a> para ver se existe alguém coordenando traduções para a sua linguagem.
 
 * Adicione um único _pull request_ por página traduzida. Isso tornará muito mais fácil a revisão para as outras pessoas.
 
@@ -296,8 +283,11 @@ Vamos dizer que você queira traduzir uma página para uma linguagem que já ten
 
 No caso do Espanhol, o código de duas letras é `es`. Então, o diretório para traduções em Espanhol está localizada em `docs/es/`.
 
-!!! tip
-    A principal ("oficial") linguagem é o  Inglês, localizado em `docs/en/`.
+/// tip
+
+A principal ("oficial") linguagem é o  Inglês, localizado em `docs/en/`.
+
+///
 
 Agora rode o _servidor ao vivo_ para as documentações em Espanhol:
 
@@ -334,8 +324,11 @@ docs/en/docs/features.md
 docs/es/docs/features.md
 ```
 
-!!! tip
-    Observe que a única mudança na rota é o código da linguagem, de `en` para `es`.
+/// tip
+
+Observe que a única mudança na rota é o código da linguagem, de `en` para `es`.
+
+///
 
 * Agora abra o arquivo de configuração MkDocs para Inglês em:
 
@@ -406,10 +399,13 @@ Updating en
 
 Agora você pode verificar em seu editor de código o mais novo diretório criado `docs/ht/`.
 
-!!! tip
-    Crie um primeiro _pull request_ com apenas isso, para iniciar a configuração da nova linguagem, antes de adicionar traduções.
+/// tip
 
-    Desse modo outros poderão ajudar com outras páginas enquanto você trabalha na primeira. 🚀
+Crie um primeiro _pull request_ com apenas isso, para iniciar a configuração da nova linguagem, antes de adicionar traduções.
+
+Desse modo outros poderão ajudar com outras páginas enquanto você trabalha na primeira. 🚀
+
+///
 
 Inicie traduzindo a página principal, `docs/ht/index.md`.
 

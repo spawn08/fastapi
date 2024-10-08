@@ -9,10 +9,10 @@ app = FastAPI()
 @app.put("/items/{item_id}")
 async def read_items(
     item_id: UUID,
-    start_datetime: datetime | None = Body(None),
-    end_datetime: datetime | None = Body(None),
-    repeat_at: time | None = Body(None),
-    process_after: timedelta | None = Body(None),
+    start_datetime: datetime = Body(),
+    end_datetime: datetime = Body(),
+    process_after: timedelta = Body(),
+    repeat_at: time | None = Body(default=None),
 ):
     start_process = start_datetime + process_after
     duration = end_datetime - start_process
@@ -20,8 +20,8 @@ async def read_items(
         "item_id": item_id,
         "start_datetime": start_datetime,
         "end_datetime": end_datetime,
-        "repeat_at": repeat_at,
         "process_after": process_after,
+        "repeat_at": repeat_at,
         "start_process": start_process,
         "duration": duration,
     }
